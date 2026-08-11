@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.towfik.music",
+  "applicationId": "com.nikhil.yt",
   "variantName": "arm64Release",
   "elements": [
     {

@@ -16,7 +16,7 @@ if (localPropertiesFile.exists()) {
 }
 
 android {
-    namespace = "com.towfik.music"
+    namespace = "com.nikhil.yt"
     compileSdk = 36
 
     defaultConfig {

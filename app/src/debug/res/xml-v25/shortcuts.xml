@@ -6,8 +6,8 @@
         android:shortcutId="search"
         android:shortcutShortLabel="@string/search">
         <intent
-            android:action="com.towfik.music.action.SEARCH"
-            android:targetClass="com.towfik.music.MainActivity"
+            android:action="com.nikhil.yt.action.SEARCH"
+            android:targetClass="com.nikhil.yt.MainActivity"
             android:targetPackage="com.towfik.music.debug" />
     </shortcut>
     <shortcut
@@ -16,8 +16,8 @@
         android:shortcutId="library"
         android:shortcutShortLabel="@string/filter_library">
         <intent
-            android:action="com.towfik.music.action.LIBRARY"
-            android:targetClass="com.towfik.music.MainActivity"
+            android:action="com.nikhil.yt.action.LIBRARY"
+            android:targetClass="com.nikhil.yt.MainActivity"
             android:targetPackage="com.towfik.music.debug" />
     </shortcut>
 </shortcuts>
