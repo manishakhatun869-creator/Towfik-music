@@ -11,80 +11,63 @@ jobs:
     name: Build Debug APK
     runs-on: ubuntu-latest
 
-    env:
-      GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx4g -Dorg.gradle.daemon=false -Dorg.gradle.parallel=false -Dorg.gradle.workers.max=2"
-      JAVA_TOOL_OPTIONS: "-Xmx4g"
-
     steps:
-      - name: Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup JDK 17
+      - name: Setup JDK
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: "17"
-          cache: gradle
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-disabled: true
 
-      - name: Create Memory Optimized gradle.properties
+      - name: Configure Gradle Memory
         shell: bash
         run: |
-          touch gradle.properties
-
-          grep -q '^org.gradle.jvmargs=' gradle.properties || \
-            echo 'org.gradle.jvmargs=-Xmx4g -XX:MaxMetaspaceSize=1g -Dfile.encoding=UTF-8' >> gradle.properties
-
-          grep -q '^kotlin.daemon.jvmargs=' gradle.properties || \
-            echo 'kotlin.daemon.jvmargs=-Xmx3g' >> gradle.properties
-
-          grep -q '^org.gradle.daemon=' gradle.properties || \
-            echo 'org.gradle.daemon=false' >> gradle.properties
-
-          grep -q '^org.gradle.parallel=' gradle.properties || \
-            echo 'org.gradle.parallel=false' >> gradle.properties
-
-          grep -q '^org.gradle.workers.max=' gradle.properties || \
-            echo 'org.gradle.workers.max=2' >> gradle.properties
-
-          grep -q '^android.useAndroidX=' gradle.properties || \
-            echo 'android.useAndroidX=true' >> gradle.properties
+          cat > gradle.properties <<'EOF'
+          org.gradle.jvmargs=-Xmx2g -XX:MaxMetaspaceSize=512m -Dfile.encoding=UTF-8
+          kotlin.daemon.jvmargs=-Xmx1536m
+          org.gradle.daemon=false
+          org.gradle.parallel=false
+          org.gradle.workers.max=1
+          android.useAndroidX=true
+          EOF
 
           echo "===== gradle.properties ====="
           cat gradle.properties
 
       - name: Make Gradle Executable
-        shell: bash
-        run: |
-          chmod +x gradlew
+        run: chmod +x ./gradlew
 
-      - name: Clean Project
-        shell: bash
-        run: |
-          ./gradlew clean --no-daemon --stacktrace
+      - name: Clean
+        run: ./gradlew clean --no-daemon --max-workers=1
 
       - name: Build Debug APK
         shell: bash
         run: |
           ./gradlew assembleDebug \
             --no-daemon \
-            --stacktrace \
             --no-parallel \
-            --max-workers=2
+            --max-workers=1 \
+            --stacktrace
 
-      - name: Find APK
+      - name: Show APK
+        if: always()
         shell: bash
         run: |
-          echo "===== APK FILES ====="
+          echo "===== Searching for APK ====="
           find . -type f -name "*.apk" -print
 
       - name: Upload Debug APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: Towfik-Music-Debug-APK
-          path: |
-            **/build/outputs/apk/debug/*.apk
+          name: Towfik-Music-Debug
+          path: "**/build/outputs/apk/debug/*.apk"
           if-no-files-found: error
           retention-days: 30
