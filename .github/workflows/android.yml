@@ -1,64 +1,50 @@
-name: Build Debug APK
+name: Build Towfik Music APK
 
 on:
-  workflow_dispatch:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   build:
-    name: Build Debug APK
+    name: Build APK
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup JDK
+      - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: '17'
+          cache: gradle
 
-      - name: Setup Gradle
-        uses: gradle/actions/setup-gradle@v4
-        with:
-          cache-disabled: true
-
-      - name: Configure Gradle Memory
-        shell: bash
-        run: |
-          # Keep original gradle.properties but reduce Kotlin daemon max heap to fit runner RAM limits
-          sed -i 's/-Xmx4096M/-Xmx2048M/g' gradle.properties
-          echo "===== gradle.properties ====="
-          cat gradle.properties
-
-      - name: Make Gradle Executable
+      - name: Make Gradle executable
         run: chmod +x ./gradlew
 
-      - name: Clean
-        run: ./gradlew clean --no-daemon
-
       - name: Build Debug APK
-        shell: bash
-        run: |
-          ./gradlew assembleUniversalDebug \
-            --no-daemon \
-            --stacktrace
-
-      - name: Show APK
-        if: always()
-        shell: bash
-        run: |
-          echo "===== Searching for APK ====="
-          find . -type f -name "*.apk" -print
+        run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload Debug APK
-        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: Towfik-Music-Universal-Debug
-          path: "app/build/outputs/apk/universal/debug/*.apk"
+          name: Towfik-Music-Debug
+          path: app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
-          retention-days: 30
+
+      - name: Build Release APK
+        run: ./gradlew assembleRelease --stacktrace
+        continue-on-error: true
+
+      - name: Upload Release APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Towfik-Music-Release
+          path: app/build/outputs/apk/release/*.apk
+          if-no-files-found: ignore
