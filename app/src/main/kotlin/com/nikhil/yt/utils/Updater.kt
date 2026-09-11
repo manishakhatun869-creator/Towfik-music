@@ -91,7 +91,7 @@ object Updater {
             client.get("https://api.github.com/repos/manishakhatun869-creator/Towfik-music/releases?per_page=$perPage") {
                 headers {
                     append("Accept", "application/vnd.github+json")
-                    append("User-Agent", "Towfii Music")
+                    append("User-Agent", "Towfik Music")
                     if (!cachedEtag.isNullOrBlank()) {
                         append("If-None-Match", cachedEtag)
                     }

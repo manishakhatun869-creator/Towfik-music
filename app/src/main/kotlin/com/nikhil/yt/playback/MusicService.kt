@@ -3771,7 +3771,7 @@ class MusicService :
             updateVeluneWidgetState(
                 context = this@MusicService,
                 title = currentMetadata?.title ?: "Not Playing",
-                artist = currentMetadata?.artists?.joinToString(", ") { it.name } ?: "Towfii Music",
+                artist = currentMetadata?.artists?.joinToString(", ") { it.name } ?: "Towfik Music",
                 isPlaying = isPlaying,
                 thumbnailUrl = currentMetadata?.thumbnailUrl
             )

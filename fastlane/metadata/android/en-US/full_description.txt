@@ -1,4 +1,4 @@
-Towfii Music is a premium ad-free YouTube Music client for Android built with Kotlin and Jetpack Compose.
+Towfik Music is a premium ad-free YouTube Music client for Android built with Kotlin and Jetpack Compose.
 
 Features:
 
@@ -23,4 +23,4 @@ Features:
 - Reorder songs in playlist or queue
 - Customizable home feed with mood chips
 
-Towfii Music is an independent third-party client. Not affiliated with Google LLC or YouTube.
+Towfik Music is an independent third-party client. Not affiliated with Google LLC or YouTube.

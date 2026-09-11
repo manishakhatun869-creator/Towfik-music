@@ -488,7 +488,7 @@ class MainActivity : ComponentActivity() {
             // Update popup disabled - IzzyOnDroid handles updates
             // LaunchedEffect(latestVersionName) {
             //     val cleanLatest = latestVersionName
-            //         .removePrefix("Towfii Music ")
+            //         .removePrefix("Towfik Music ")
             //         .removePrefix("v")
             //         .trim()
             //     if (cleanLatest.isNotEmpty() && cleanLatest != BuildConfig.VERSION_NAME) {
@@ -1067,7 +1067,7 @@ class MainActivity : ComponentActivity() {
                                                         // app icon
                                                         Image(
                                                             painter = painterResource(id = R.drawable.ic_velune_concept),
-                                                            contentDescription = "Towfii Music Logo",
+                                                            contentDescription = "Towfik Music Logo",
                                                             modifier = Modifier
                                                                 .size(35.dp)
                                                                 .padding(end = 6.dp)

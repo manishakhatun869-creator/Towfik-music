@@ -23,7 +23,7 @@ dependencyResolutionManagement {
 //     id("org.gradle.toolchains.foojay-resolver-convention") version("1.0.0")
 // }
 
-rootProject.name = "Towfii Music"
+rootProject.name = "Towfik Music"
 include(":app")
 include(":innertube")
 include(":kugou")

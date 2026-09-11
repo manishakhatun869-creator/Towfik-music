@@ -365,7 +365,7 @@ private fun buildCrashReport(
     }.getOrDefault("")
 
     val header = buildString {
-        appendLine("Towfii Music crash report")
+        appendLine("Towfik Music crash report")
         if (timestampText.isNotBlank()) appendLine("Time: $timestampText")
         if (versionName.isNotBlank() || versionCode.isNotBlank()) {
             appendLine("App: $versionName ($versionCode)")

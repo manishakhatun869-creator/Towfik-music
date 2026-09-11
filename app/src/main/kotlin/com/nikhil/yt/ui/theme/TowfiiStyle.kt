@@ -6,7 +6,7 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
-// Towfii Music's midnight-violet identity. Custom user palettes remain supported.
+// Towfik Music's midnight-violet identity. Custom user palettes remain supported.
 val MidnightVioletColors = darkColorScheme(
     primary = Color(0xFFC4B5FD),
     onPrimary = Color(0xFF28134F),

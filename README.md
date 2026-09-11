@@ -1,4 +1,4 @@
-# Towfii Music
+# Towfik Music
 
 An ad-free Android music app built with Kotlin and Jetpack Compose, forked from
 [Velune by Nikhil](https://github.com/nikhilvishwakarma00/Velune).
@@ -29,7 +29,7 @@ cd Towfik-music
 ```
 
 The debug APK is written to `app/build/outputs/apk/universal/debug/`.
-The **Build Towfii Music APK** GitHub Actions workflow also builds a debug APK on
+The **Build Towfik Music APK** GitHub Actions workflow also builds a debug APK on
 pull requests to `main`, pushes to `main`, or manual dispatch.
 
 Optional integrations read `LASTFM_API_KEY`, `LASTFM_SECRET`, and
@@ -39,10 +39,10 @@ configuration; debug APKs do not require release credentials.
 
 ## Branding and compatibility
 
-The display name is **Towfii Music**. The existing application ID
+The display name is **Towfik Music**. The existing application ID
 `com.towfik.music` (debug: `com.towfik.music.debug`), Kotlin namespace, preference
 keys and backup format remain unchanged to avoid breaking existing installations
-and data. Original icon artwork is retained.
+and data. A custom violet-and-cyan T/music-note icon is used for the launcher and app header.
 
 Project and update links target this repository, not the upstream app. In-app
 release downloads require published releases here with assets named
@@ -55,13 +55,16 @@ Original Velune development by Nikhil. Thanks to Archivetune (base framework),
 Metrolist, InnerTune, Kizzy, SimpMusic and BetterLyrics. Original source attribution
 and license notices are preserved.
 
-Licensed under [GPL-3.0](LICENSE). Towfii Music is an independent client, not
+Licensed under [GPL-3.0](LICENSE). Towfik Music is an independent client, not
 affiliated with YouTube or Google. Please support artists through official platforms.
 
 ## Midnight violet edition
 
-Towfii Music is maintained by **Towfik Mondal**. The default experience uses a
+Towfik Music is maintained by **Towfik Mondal**. The default experience uses a
 midnight-navy and violet palette, rounded surfaces and a new home masthead.
 Existing custom appearance preferences are respected; disable dynamic colors and
 pure black in Appearance to use the branded palette. The GitHub star popup and
 its automatic launch-count reminders have been removed.
+
+Icon source: `assets/towfik-music-icon.svg`. Regenerate launcher artwork with
+`scripts/generate_brand_icons.py` (requires resvg-py and Pillow).

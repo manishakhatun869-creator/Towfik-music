@@ -151,13 +151,13 @@ fun UpdateScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "⚠️ By using Towfii Music's in-app updater, you are getting updates straight from the developer. These updates are not checked by whatever app store you might have installed Towfii Music from.",
+                        text = "⚠️ By using Towfik Music's in-app updater, you are getting updates straight from the developer. These updates are not checked by whatever app store you might have installed Towfik Music from.",
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold
                     )
 
                     Text(
-                        text = "Towfii Music provides two download channels for builds:",
+                        text = "Towfik Music provides two download channels for builds:",
                         style = MaterialTheme.typography.bodyMedium
                     )
 
@@ -236,13 +236,13 @@ fun UpdateScreen(
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     Text(
-                        text = "⚠️ By using Towfii Music's in-app updater, you are getting updates straight from the developer. These updates are not checked by whatever app store you might have installed Towfii Music from.",
+                        text = "⚠️ By using Towfik Music's in-app updater, you are getting updates straight from the developer. These updates are not checked by whatever app store you might have installed Towfik Music from.",
                         style = MaterialTheme.typography.bodyMedium,
                         fontWeight = FontWeight.SemiBold
                     )
 
                     Text(
-                        text = "Towfii Music provides two download channels for builds:",
+                        text = "Towfik Music provides two download channels for builds:",
                         style = MaterialTheme.typography.bodyMedium
                     )
 

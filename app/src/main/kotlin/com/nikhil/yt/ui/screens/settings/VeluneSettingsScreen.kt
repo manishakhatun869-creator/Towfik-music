@@ -91,7 +91,7 @@ fun VeluneSettingsScreen(
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.ic_velune_concept),
-                            contentDescription = "Towfii Music Logo",
+                            contentDescription = "Towfik Music Logo",
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(12.dp)
@@ -100,7 +100,7 @@ fun VeluneSettingsScreen(
                     Spacer(Modifier.width(16.dp))
                     Column {
                         Text(
-                            text = "Towfii Music",
+                            text = "Towfik Music",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Normal
                         )

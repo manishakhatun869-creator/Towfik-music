@@ -1,5 +1,7 @@
 package com.nikhil.yt.ui.component
 
+import androidx.compose.foundation.Image
+import androidx.compose.ui.res.painterResource
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
@@ -29,6 +31,11 @@ fun TowfiiHeader() {
             .padding(24.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp),
     ) {
+        Image(
+            painter = painterResource(R.drawable.ic_towfik_logo),
+            contentDescription = null,
+            modifier = Modifier.size(64.dp).clip(RoundedCornerShape(18.dp)),
+        )
         Text(
             text = stringResource(R.string.towfii_owner),
             style = MaterialTheme.typography.labelMedium,

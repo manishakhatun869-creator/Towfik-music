@@ -1694,7 +1694,7 @@ private fun PremiumSummaryStoryCard(
                     }
                     Column {
                         Text(
-                            text = "Towfii Music",
+                            text = "Towfik Music",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = SoftWhite
@@ -1834,7 +1834,7 @@ private fun PremiumSummaryStoryCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = joinByBullet("Towfii Music", year.toString()),
+                        text = joinByBullet("Towfik Music", year.toString()),
                         style = MaterialTheme.typography.labelMedium,
                         color = SoftWhite.copy(alpha = 0.5f)
                     )
