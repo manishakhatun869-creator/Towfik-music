@@ -90,7 +90,7 @@ fun VeluneSettingsScreen(
                         contentAlignment = Alignment.Center
                     ) {
                         Image(
-                            painter = painterResource(id = R.drawable.ic_velune_concept),
+                            painter = painterResource(id = R.drawable.ic_towfik_logo),
                             contentDescription = "Towfik Music Logo",
                             modifier = Modifier
                                 .fillMaxSize()
@@ -102,7 +102,7 @@ fun VeluneSettingsScreen(
                         Text(
                             text = "Towfik Music",
                             style = MaterialTheme.typography.titleMedium,
-                            fontWeight = FontWeight.Normal
+                            fontWeight = FontWeight.SemiBold
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
@@ -264,7 +264,7 @@ private fun SettingsItemScreenshotStyle(
         Text(
             text = title,
             style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(modifier = Modifier.weight(1f))
@@ -288,7 +288,10 @@ private fun SettingsItemAccountStyle(
         modifier = Modifier
             .fillMaxWidth()
             .clickable(onClick = onClick)
-            .padding(vertical = 22.dp, horizontal = 4.dp),
+            .padding(vertical = 6.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainer)
+            .padding(vertical = 22.dp, horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (model != null) {
@@ -319,7 +322,7 @@ private fun SettingsItemAccountStyle(
         Text(
             text = title,
             style = MaterialTheme.typography.titleMedium,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.SemiBold,
             color = MaterialTheme.colorScheme.onSurface
         )
         Spacer(modifier = Modifier.weight(1f))

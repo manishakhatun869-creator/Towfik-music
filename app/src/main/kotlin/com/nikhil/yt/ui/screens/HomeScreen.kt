@@ -300,7 +300,11 @@ fun HomeScreen(
                 contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues()
             ) {
                 item(key = "towfii_header") {
-                    com.nikhil.yt.ui.component.TowfiiHeader()
+                    com.nikhil.yt.ui.component.TowfiiHeader(
+                        onSearch = { navController.navigate(Screens.Search.route) { launchSingleTop = true } },
+                        onLibrary = { navController.navigate(Screens.Library.route) { launchSingleTop = true } },
+                        onHistory = { navController.navigate(Screens.History.route) { launchSingleTop = true } },
+                    )
                 }
                 if (showHomeCategoryChips) {
                     item {
@@ -313,30 +317,6 @@ fun HomeScreen(
                         )
                     }
                 }
-
-                quickPicks?.takeIf { it.isNotEmpty() }?.let { picks ->
-            /*
-                item {
-                    NavigationTitle(
-                        title = stringResource(R.string.quick_picks),
-                        modifier = Modifier.animateItem()
-                    )
-                }
-            */
-
-                item {
-                    QuickPicksSection(
-                        quickPicks = picks,
-                        mediaMetadata = mediaMetadata,
-                        isPlaying = isPlaying,
-                        navController = navController,
-                        playerConnection = playerConnection,
-                        menuState = menuState,
-                        haptic = haptic
-                    )
-                }
-            }
-
 
             quickPicks?.takeIf { it.isNotEmpty() }?.let { picks ->
                 item {

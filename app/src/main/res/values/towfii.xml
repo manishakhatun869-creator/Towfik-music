@@ -2,4 +2,11 @@
 <resources>
     <string name="towfii_owner">BY TOWFIK MONDAL</string>
     <string name="towfii_tagline">Your music. Your midnight escape.</string>
+    <string name="towfik_search_hint">Search songs, artists, albums</string>
+    <string name="towfik_daily_selection">MAKE IT YOUR MOMENT</string>
+    <string name="towfik_hero_title">Find your
+next obsession.</string>
+    <string name="towfik_hero_subtitle">Your favourites. Fresh discoveries. One beautiful place to listen.</string>
+    <string name="towfik_open_library">Open your library</string>
+    <string name="towfik_start_mix">Start mix</string>
 </resources>

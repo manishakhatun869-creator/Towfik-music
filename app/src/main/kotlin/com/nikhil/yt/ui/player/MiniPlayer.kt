@@ -147,11 +147,13 @@ private fun NewMiniPlayer(
                 .offset { IntOffset(offsetX.roundToInt(), 0) }
                 .clip(RoundedCornerShape(32.dp))
                 .background(
-                    color = MaterialTheme.colorScheme.surfaceContainer
+                    brush = androidx.compose.ui.graphics.Brush.horizontalGradient(
+                        listOf(MaterialTheme.colorScheme.surfaceContainerHigh, MaterialTheme.colorScheme.surfaceContainer)
+                    )
                 )
                 .border(
                     width = 1.dp,
-                    color = MaterialTheme.colorScheme.outlineVariant.copy(alpha = 0.3f),
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.22f),
                     shape = RoundedCornerShape(32.dp)
                 )
         ) {

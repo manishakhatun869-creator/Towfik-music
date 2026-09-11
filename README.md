@@ -68,3 +68,8 @@ its automatic launch-count reminders have been removed.
 
 Icon source: `assets/towfik-music-icon.svg`. Regenerate launcher artwork with
 `scripts/generate_brand_icons.py` (requires resvg-py and Pillow).
+
+The home dashboard includes search, library and history shortcuts, a decorative
+record hero, and a single quick-picks section with a functional Start mix action.
+Music section headings, settings cards and the floating mini-player use the
+updated visual style. Existing playback, menus and custom themes remain available.

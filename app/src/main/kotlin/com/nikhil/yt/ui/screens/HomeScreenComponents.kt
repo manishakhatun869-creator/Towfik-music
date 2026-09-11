@@ -964,19 +964,20 @@ fun QuickPicksListSection(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "Quick picks",
+                text = stringResource(R.string.quick_picks),
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.weight(1f)
             )
-            Text(
-                text = "Play all",
-                style = MaterialTheme.typography.labelLarge,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier
-                    .clip(RoundedCornerShape(50))
-                    .background(MaterialTheme.colorScheme.primaryContainer.copy(alpha = 0.5f))
-                    .padding(horizontal = 12.dp, vertical = 4.dp)
-            )
+            androidx.compose.material3.TextButton(
+                onClick = {
+                    distinctQuickPicks.firstOrNull()?.let { song ->
+                        playerConnection.playQueue(YouTubeQueue.radio(song.toMediaMetadata()))
+                    }
+                },
+                enabled = distinctQuickPicks.isNotEmpty(),
+            ) {
+                Text(stringResource(R.string.towfik_start_mix))
+            }
         }
 
         androidx.compose.foundation.pager.HorizontalPager(
@@ -985,7 +986,11 @@ fun QuickPicksListSection(
         ) { pageIndex ->
             val pageSongs = pages.getOrNull(pageIndex) ?: emptyList()
             Row(modifier = Modifier.fillMaxWidth()) {
-                Column(modifier = Modifier.weight(1f)) {
+                Column(modifier = Modifier.weight(1f)
+                    .padding(horizontal = 16.dp)
+                    .clip(RoundedCornerShape(24.dp))
+                    .background(MaterialTheme.colorScheme.surfaceContainerLow)
+                    .padding(vertical = 8.dp)) {
                     pageSongs.forEach { song ->
                         val isActive = song.id == mediaMetadata?.id
                         SongListItem(
