@@ -40,7 +40,7 @@ class TogetherGuestPlaybackPlannerTest {
     }
 
     @Test
-    fun planPlayTrackNow_addsAndSkips_whenTrackMissingAndAddAllowed() {
+    fun planPlayTrackNow_addsAndSelectsRequestedTrack_whenTrackMissingAndAddAllowed() {
         val roomState =
             TogetherRoomState(
                 sessionId = "sid",
@@ -54,7 +54,8 @@ class TogetherGuestPlaybackPlannerTest {
         assertEquals(
             listOf(
                 TogetherGuestOp.AddTrack(TogetherTrack(id = "b", title = "B"), AddTrackMode.PLAY_NEXT),
-                TogetherGuestOp.Control(ControlAction.SkipNext),
+                // Select by ID: SkipNext could select the wrong track if the host queue changes.
+                TogetherGuestOp.Control(ControlAction.SeekToTrack(trackId = "b", positionMs = 0L)),
             ),
             ops,
         )
@@ -78,6 +79,53 @@ class TogetherGuestPlaybackPlannerTest {
                 TogetherGuestOp.Control(ControlAction.Play),
             ),
             ops,
+        )
+    }
+
+    private fun room(allowAdd: Boolean = true) = TogetherRoomState(
+        sessionId = "sid",
+        hostId = "hid",
+        settings = TogetherRoomSettings(allowGuestsToControlPlayback = true, allowGuestsToAddTracks = allowAdd),
+        queue = listOf(TogetherTrack(id = "a", title = "A")),
+        currentIndex = 0,
+        isPlaying = false,
+    )
+
+    @Test
+    fun planPlayTrackNow_rejectsBlankTrackId() {
+        assertEquals(emptyList<TogetherGuestOp>(), TogetherGuestPlaybackPlanner.planPlayTrackNow(
+            room(), TogetherTrack(id = "  ", title = "Invalid"), 0L, true,
+        ))
+    }
+
+    @Test
+    fun planPlayTrackNow_rejectsMissingTrackWhenAddingDisabled() {
+        assertEquals(emptyList<TogetherGuestOp>(), TogetherGuestPlaybackPlanner.planPlayTrackNow(
+            room(allowAdd = false), TogetherTrack(id = "b", title = "B"), 0L, true,
+        ))
+    }
+
+    @Test
+    fun planPlayTrackNow_trimsIdClampsPositionAndKeepsPaused() {
+        assertEquals(
+            listOf(TogetherGuestOp.Control(ControlAction.SeekToTrack(trackId = "a", positionMs = 0L))),
+            TogetherGuestPlaybackPlanner.planPlayTrackNow(
+                room(), TogetherTrack(id = " a ", title = "A"), -100L, false,
+            ),
+        )
+    }
+
+    @Test
+    fun planPlayTrackNow_addsSelectsAndPlaysWhenHostPaused() {
+        assertEquals(
+            listOf(
+                TogetherGuestOp.AddTrack(TogetherTrack(id = "b", title = "B"), AddTrackMode.PLAY_NEXT),
+                TogetherGuestOp.Control(ControlAction.SeekToTrack(trackId = "b", positionMs = 0L)),
+                TogetherGuestOp.Control(ControlAction.Play),
+            ),
+            TogetherGuestPlaybackPlanner.planPlayTrackNow(
+                room(), TogetherTrack(id = " b ", title = "B"), 500L, true,
+            ),
         )
     }
 }
