@@ -155,15 +155,12 @@ import com.nikhil.yt.constants.DarkModeKey
 import com.nikhil.yt.constants.DefaultOpenTabKey
 import com.nikhil.yt.constants.DisableScreenshotKey
 import com.nikhil.yt.constants.DynamicThemeKey
-import com.nikhil.yt.constants.HasPressedStarKey
-import com.nikhil.yt.constants.LaunchCountKey
 import com.nikhil.yt.constants.MiniPlayerBottomSpacing
 import com.nikhil.yt.constants.MiniPlayerHeight
 import com.nikhil.yt.constants.NavigationBarAnimationSpec
 import com.nikhil.yt.constants.NavigationBarHeight
 import com.nikhil.yt.constants.PauseSearchHistoryKey
 import com.nikhil.yt.constants.PureBlackKey
-import com.nikhil.yt.constants.RemindAfterKey
 import com.nikhil.yt.constants.SYSTEM_DEFAULT
 import com.nikhil.yt.constants.SearchSource
 import com.nikhil.yt.constants.SearchSourceKey
@@ -194,7 +191,6 @@ import com.nikhil.yt.ui.component.IconButton
 
 import com.nikhil.yt.ui.component.LocalBottomSheetPageState
 import com.nikhil.yt.ui.component.LocalMenuState
-import com.nikhil.yt.ui.component.StarDialog
 import com.nikhil.yt.ui.component.TopSearch
 import com.nikhil.yt.ui.component.rememberBottomSheetState
 import com.nikhil.yt.ui.component.shimmer.ShimmerTheme
@@ -492,7 +488,7 @@ class MainActivity : ComponentActivity() {
             // Update popup disabled - IzzyOnDroid handles updates
             // LaunchedEffect(latestVersionName) {
             //     val cleanLatest = latestVersionName
-            //         .removePrefix("Velune ")
+            //         .removePrefix("Towfii Music ")
             //         .removePrefix("v")
             //         .trim()
             //     if (cleanLatest.isNotEmpty() && cleanLatest != BuildConfig.VERSION_NAME) {
@@ -506,7 +502,7 @@ class MainActivity : ComponentActivity() {
             // }
 
 
-            val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = true)
+            val enableDynamicTheme by rememberPreference(DynamicThemeKey, defaultValue = false)
             val customThemeColorValue by rememberPreference(CustomThemeColorKey, defaultValue = "default")
             val darkTheme by rememberEnumPreference(DarkModeKey, defaultValue = DarkMode.ON)
             val useSystemFont by rememberPreference(UseSystemFontKey, defaultValue = false)
@@ -518,7 +514,7 @@ class MainActivity : ComponentActivity() {
             LaunchedEffect(useDarkTheme) {
                 setSystemBarAppearance(useDarkTheme)
             }
-            val pureBlackEnabled by rememberPreference(PureBlackKey, defaultValue = true)
+            val pureBlackEnabled by rememberPreference(PureBlackKey, defaultValue = false)
             val pureBlack = pureBlackEnabled && useDarkTheme
 
             val customThemeSeedPalette = remember(customThemeColorValue) {
@@ -936,75 +932,6 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    var showStarDialog by remember { mutableStateOf(false) }
-
-                    LaunchedEffect(Unit) {
-                        delay(3000)
-
-                        withContext(Dispatchers.IO) {
-                            val current = dataStore[LaunchCountKey] ?: 0
-                            val newCount = current + 1
-                            dataStore.edit { prefs ->
-                                prefs[LaunchCountKey] = newCount
-                            }
-                        }
-
-                        val shouldShow = withContext(Dispatchers.IO) {
-                            val hasPressed = dataStore[HasPressedStarKey] ?: false
-                            val remindAfter = dataStore[RemindAfterKey] ?: 3
-                            !hasPressed && (dataStore[LaunchCountKey] ?: 0) >= remindAfter
-                        }
-
-                        if (shouldShow) {
-                            var waited = 0L
-                            val waitStep = 500L
-                            val maxWait = 30_000L
-                            while (bottomSheetPageState.isVisible && waited < maxWait) {
-                                delay(waitStep)
-                                waited += waitStep
-                            }
-                            showStarDialog = true
-                        }
-                    }
-
-                    if (showStarDialog) {
-                        StarDialog(
-                            onDismissRequest = { showStarDialog = false },
-                            onStar = {
-                                coroutineScope.launch {
-                                    try {
-                                        withContext(Dispatchers.IO) {
-                                            dataStore.edit { prefs ->
-                                                prefs[HasPressedStarKey] = true
-                                                prefs[RemindAfterKey] = Int.MAX_VALUE
-                                            }
-                                        }
-                                    } catch (e: Exception) {
-                                        reportException(e)
-                                    } finally {
-                                        showStarDialog = false
-                                    }
-                                }
-                            },
-                            onLater = {
-                                coroutineScope.launch {
-                                    try {
-                                        val launch = withContext(Dispatchers.IO) { dataStore[LaunchCountKey] ?: 0 }
-                                        withContext(Dispatchers.IO) {
-                                            dataStore.edit { prefs ->
-                                                prefs[RemindAfterKey] = launch + 10
-                                            }
-                                        }
-                                    } catch (e: Exception) {
-                                        reportException(e)
-                                    } finally {
-                                        showStarDialog = false
-                                    }
-                                }
-                            }
-                        )
-                    }
-
                     remember(navBackStackEntry) {
                         when (navBackStackEntry?.destination?.route) {
                             Screens.Home.route -> R.string.home
@@ -1140,7 +1067,7 @@ class MainActivity : ComponentActivity() {
                                                         // app icon
                                                         Image(
                                                             painter = painterResource(id = R.drawable.ic_velune_concept),
-                                                            contentDescription = "Velune Logo",
+                                                            contentDescription = "Towfii Music Logo",
                                                             modifier = Modifier
                                                                 .size(35.dp)
                                                                 .padding(end = 6.dp)

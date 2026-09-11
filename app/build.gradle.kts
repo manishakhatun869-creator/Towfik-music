@@ -20,7 +20,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-    applicationId = "com.towfik.music"
+        applicationId = "com.towfik.music"
         minSdk = 26
         targetSdk = 36
         versionCode = 10

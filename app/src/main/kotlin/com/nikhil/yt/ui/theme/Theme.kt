@@ -42,7 +42,7 @@ import kotlinx.serialization.json.jsonPrimitive
 import kotlin.math.abs
 import kotlin.math.min
 
-val DefaultThemeColor = Color(0xFFED5564)
+val DefaultThemeColor = Color(0xFFA78BFA)
 
 data class ThemeSeedPalette(
     val primary: Color,
@@ -63,7 +63,7 @@ fun VeluneTheme(
 ) {
     val context = LocalContext.current
     val useSystemDynamicColor =
-        (seedPalette == null && themeColor == DefaultThemeColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+        false // Towfii uses a consistent branded palette rather than wallpaper colors.
 
     val typography = remember(useSystemFont) {
         if (useSystemFont) SystemTypography else AppTypography
@@ -71,7 +71,9 @@ fun VeluneTheme(
 
     val appColorScheme =
         remember(seedPalette, themeColor, darkTheme) {
-            if (seedPalette != null) {
+            if (seedPalette == null && themeColor == DefaultThemeColor && darkTheme) {
+                MidnightVioletColors
+            } else if (seedPalette != null) {
                 exactPaletteColorScheme(
                     palette = seedPalette,
                     isDark = darkTheme,
@@ -101,6 +103,7 @@ fun VeluneTheme(
     MaterialExpressiveTheme(
         colorScheme = animatedColorScheme,
         typography = typography,
+        shapes = TowfiiShapes,
         content = content
     )
 }

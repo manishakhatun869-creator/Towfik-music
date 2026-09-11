@@ -299,6 +299,9 @@ fun HomeScreen(
                 state = lazylistState,
                 contentPadding = LocalPlayerAwareWindowInsets.current.asPaddingValues()
             ) {
+                item(key = "towfii_header") {
+                    com.nikhil.yt.ui.component.TowfiiHeader()
+                }
                 if (showHomeCategoryChips) {
                     item {
                         ChipsRow(

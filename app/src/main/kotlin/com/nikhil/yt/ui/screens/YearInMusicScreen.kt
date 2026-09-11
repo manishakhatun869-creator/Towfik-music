@@ -279,7 +279,7 @@ fun YearInMusicScreen(
                                     val uri = ComposeToImage.saveBitmapAsFile(
                                         context,
                                         fitted,
-                                        "Velune_YearInMusic_$selectedYear"
+                                        "TowfiiMusic_YearInMusic_$selectedYear"
                                     )
                                     val shareIntent = Intent(Intent.ACTION_SEND).apply {
                                         type = "image/png"
@@ -1694,7 +1694,7 @@ private fun PremiumSummaryStoryCard(
                     }
                     Column {
                         Text(
-                            text = "Velune",
+                            text = "Towfii Music",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             color = SoftWhite
@@ -1834,7 +1834,7 @@ private fun PremiumSummaryStoryCard(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = joinByBullet("Velune", year.toString()),
+                        text = joinByBullet("Towfii Music", year.toString()),
                         style = MaterialTheme.typography.labelMedium,
                         color = SoftWhite.copy(alpha = 0.5f)
                     )

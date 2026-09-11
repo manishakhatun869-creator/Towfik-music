@@ -1,46 +1,37 @@
-name: Build Towfik Music APK
+name: Build Towfii Music APK
 
 on:
   push:
-    branches:
-      - main
+    branches: [main, arena/01a08ecb-towfik-music]
   pull_request:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
-    name: Build APK
+    name: Build Debug APK
     runs-on: ubuntu-latest
-
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup JDK 17
+      - name: Setup JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-
-          cache: gradle
-
-      - name: Make Gradle executable
-        run: chmod +x ./gradlew
-
+          java-version: '21'
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Build Debug APK
-
-
+        run: ./gradlew :app:assembleUniversalDebug
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
-          name: Towfik-Music-Debug
-
-        continue-on-error: true
-
-      - name: Upload Release APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: Towfik-Music-Release
-
-          if-no-files-found: ignore
+          name: Towfii-Music-Debug
+          path: app/build/outputs/apk/universal/debug/*.apk
+          if-no-files-found: error

@@ -91,7 +91,7 @@ fun VeluneSettingsScreen(
                     ) {
                         Image(
                             painter = painterResource(id = R.drawable.ic_velune_concept),
-                            contentDescription = "Velune Logo",
+                            contentDescription = "Towfii Music Logo",
                             modifier = Modifier
                                 .fillMaxSize()
                                 .padding(12.dp)
@@ -100,13 +100,13 @@ fun VeluneSettingsScreen(
                     Spacer(Modifier.width(16.dp))
                     Column {
                         Text(
-                            text = "Velune",
+                            text = "Towfii Music",
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Normal
                         )
                         Spacer(Modifier.height(4.dp))
                         Text(
-                            text = "v${BuildConfig.VERSION_NAME}",
+                            text = "By Towfik Mondal • v${BuildConfig.VERSION_NAME}",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -247,8 +247,11 @@ private fun SettingsItemScreenshotStyle(
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .padding(vertical = 6.dp)
+            .clip(RoundedCornerShape(24.dp))
+            .background(MaterialTheme.colorScheme.surfaceContainer)
             .clickable(onClick = onClick)
-            .padding(vertical = 30.dp, horizontal = 4.dp),
+            .padding(vertical = 22.dp, horizontal = 20.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(

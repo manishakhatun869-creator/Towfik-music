@@ -126,7 +126,7 @@ fun AppearanceSettings(
 ) {
     val (dynamicTheme, onDynamicThemeChange) = rememberPreference(
         DynamicThemeKey,
-        defaultValue = true
+        defaultValue = false
     )
     val (randomThemeOnStartup, onRandomThemeOnStartupChange) = rememberPreference(
         RandomThemeOnStartupKey,
@@ -169,7 +169,7 @@ fun AppearanceSettings(
             PlayerBackgroundStyleKey,
             defaultValue = PlayerBackgroundStyle.COLORING,
         )
-    val (pureBlack, onPureBlackChange) = rememberPreference(PureBlackKey, defaultValue = true)
+    val (pureBlack, onPureBlackChange) = rememberPreference(PureBlackKey, defaultValue = false)
     val (disableBlur, onDisableBlurChange) = rememberPreference(DisableBlurKey, defaultValue = true)
     val (useSystemFont, onUseSystemFontChange) = rememberPreference(UseSystemFontKey, defaultValue = false)
     val (defaultOpenTab, onDefaultOpenTabChange) = rememberEnumPreference(
