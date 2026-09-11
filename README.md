@@ -69,7 +69,14 @@ its automatic launch-count reminders have been removed.
 Icon source: `assets/towfik-music-icon.svg`. Regenerate launcher artwork with
 `scripts/generate_brand_icons.py` (requires resvg-py and Pillow).
 
-The home dashboard includes search, library and history shortcuts, a decorative
-record hero, and a single quick-picks section with a functional Start mix action.
-Music section headings, settings cards and the floating mini-player use the
-updated visual style. Existing playback, menus and custom themes remain available.
+The home dashboard has compact branding and library/history shortcuts. The added
+search box and decorative record banner have been removed. Search uses the
+existing activity search interface; results require a `search/{query}` route,
+not a bare `search` route. Quick picks, music artwork, playback and menus remain.
+
+## Validation
+
+Run `python3 scripts/check_navigation.py` for targeted source-level navigation
+regression checks, and `./gradlew :app:testUniversalDebugUnitTest :app:assembleUniversalDebug`
+for the unit tests and APK build. These checks do not replace on-device testing;
+see [the device smoke-test checklist](docs/DEVICE_TESTING.md).

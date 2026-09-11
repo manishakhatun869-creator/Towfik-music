@@ -27,8 +27,17 @@ jobs:
         uses: android-actions/setup-android@v3
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-      - name: Build Debug APK
-        run: ./gradlew :app:assembleUniversalDebug
+      - name: Check home navigation regressions
+        run: python3 scripts/check_navigation.py
+      - name: Test and build Debug APK
+        run: ./gradlew :app:testUniversalDebugUnitTest :app:assembleUniversalDebug
+      - name: Upload unit test reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: Towfik-Music-Test-Reports
+          path: app/build/reports/tests/
+          if-no-files-found: warn
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:

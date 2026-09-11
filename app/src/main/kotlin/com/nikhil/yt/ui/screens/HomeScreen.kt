@@ -301,7 +301,6 @@ fun HomeScreen(
             ) {
                 item(key = "towfii_header") {
                     com.nikhil.yt.ui.component.TowfiiHeader(
-                        onSearch = { navController.navigate(Screens.Search.route) { launchSingleTop = true } },
                         onLibrary = { navController.navigate(Screens.Library.route) { launchSingleTop = true } },
                         onHistory = { navController.navigate(Screens.History.route) { launchSingleTop = true } },
                     )
