@@ -12,9 +12,9 @@ def error(message):
 log = Path(sys.argv[1])
 if log.exists():
     lines = log.read_text(errors='replace').splitlines()
-    for line in lines:
-        if line.startswith('e: ') or ' FAILED' in line or line.startswith('> '):
-            error(line[:1500])
+    diagnostics = [line for line in lines if line.startswith('e: ') or ' FAILED' in line]
+    if diagnostics:
+        error('\n'.join(diagnostics[-20:])[:12000])
     if '* What went wrong:' in lines:
         i = lines.index('* What went wrong:')
         error('\n'.join(lines[i:i + 15]))
